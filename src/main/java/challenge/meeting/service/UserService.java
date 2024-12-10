@@ -36,6 +36,6 @@ public class UserService {
 		
 		userRepository.save(newUser);
 		
-		System.out.println("Atualização feita");
+		
 	}
 }

@@ -35,4 +35,11 @@ public class Room {
 	@OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
 	private List<Reservation> reservations = new ArrayList<>();
 
+	public Room(String name, Integer maxCapacity) {
+		super();
+		this.name = name;
+		this.maxCapacity = maxCapacity;
+	}
+
+	
 }
