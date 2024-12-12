@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import challenge.meeting.enuns.UserRole;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,7 +12,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -45,9 +46,9 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserRole role; 
 	
-	@ManyToMany(mappedBy = "users")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Reservation> reservations = new HashSet<>();
-
+	
 	public User(String userName, String email,
 			@Size(min = 8, max = 20, message = "A senha deve ter entre 8 a 20 caracteres") String password,
 			UserRole role) {

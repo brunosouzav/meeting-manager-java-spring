@@ -1,8 +1,6 @@
 package challenge.meeting.domains;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 import challenge.meeting.enuns.ReservationStatus;
 import jakarta.persistence.Column;
@@ -13,8 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -43,12 +39,22 @@ public class Reservation {
 	private ReservationStatus status;
 	
 	@ManyToOne
-	@JoinColumn(name = "room_id", nullable = false)
+	@JoinColumn(name = "room_id")
 	private Room room ;
 	
-	@ManyToMany
-	@JoinTable(name = "tb_user_reservation", joinColumns = 
-	@JoinColumn(name = "reservation_id"), inverseJoinColumns = 
-	@JoinColumn(name = "user_id"))
-	private Set<User> users = new HashSet<>();
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+	
+
+	   public Reservation(LocalDateTime start, LocalDateTime end, ReservationStatus status, Room room, User user) {
+	        this.start = start;
+	        this.end = end;
+	        this.status = status != null ? status : ReservationStatus.PENDING;  
+	        this.room = room;
+	        this.user = user;  
+	    }
+	
+
 }

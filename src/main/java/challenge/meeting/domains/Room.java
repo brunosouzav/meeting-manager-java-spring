@@ -1,7 +1,7 @@
 package challenge.meeting.domains;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -33,7 +33,7 @@ public class Room {
 	private Integer maxCapacity;
 	
 	@OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-	private List<Reservation> reservations = new ArrayList<>();
+	private Set<Reservation> reservations = new HashSet<>();
 
 	public Room(String name, Integer maxCapacity) {
 		super();
