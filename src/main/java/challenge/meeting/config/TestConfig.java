@@ -37,13 +37,14 @@ public class TestConfig implements CommandLineRunner {
 		Room r1 = new Room( "Meeting", 30);
 		roomRepository.save(r1);
 		
+		int quantity = 20;
 		String startStr = "2024-12-11T14:30";
 		String endStr = "2024-12-11T15:30";
 		
 		LocalDateTime dataStart = LocalDateTime.parse(startStr);
 		LocalDateTime dataend = LocalDateTime.parse(endStr);
 		
-		Reservation reservation1 = new Reservation(dataStart, dataend, null, r1, u1);
+		Reservation reservation1 = new Reservation(dataStart, dataend, quantity, null, r1, u1);
 		reservationRepository.save(reservation1);
 	}
 

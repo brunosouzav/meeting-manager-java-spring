@@ -17,7 +17,7 @@ import challenge.meeting.domains.User;
 import challenge.meeting.service.UserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
 	@Autowired 

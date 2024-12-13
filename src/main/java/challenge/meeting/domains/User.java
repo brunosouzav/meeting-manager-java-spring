@@ -3,6 +3,8 @@ package challenge.meeting.domains;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import challenge.meeting.enuns.UserRole;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -47,6 +49,7 @@ public class User {
 	private UserRole role; 
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<Reservation> reservations = new HashSet<>();
 	
 	public User(String userName, String email,

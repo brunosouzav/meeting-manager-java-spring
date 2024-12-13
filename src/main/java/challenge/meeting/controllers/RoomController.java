@@ -17,7 +17,7 @@ import challenge.meeting.domains.Room;
 import challenge.meeting.service.RoomService;
 
 @RestController
-@RequestMapping("/rooms")
+@RequestMapping("/api/rooms")
 public class RoomController {
 
 	@Autowired

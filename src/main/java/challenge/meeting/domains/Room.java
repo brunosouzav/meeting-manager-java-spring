@@ -3,6 +3,8 @@ package challenge.meeting.domains;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,6 +35,7 @@ public class Room {
 	private Integer maxCapacity;
 	
 	@OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<Reservation> reservations = new HashSet<>();
 
 	public Room(String name, Integer maxCapacity) {

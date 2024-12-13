@@ -18,8 +18,8 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 	}
 	
-	@ExceptionHandler(RoomUnavailableException.class)
-	public ResponseEntity<String> handleRoomUnavailableException(RoomUnavailableException e) {
+	@ExceptionHandler(InvalidReservationException.class)
+	public ResponseEntity<String> handleInvalidReservationException(InvalidReservationException e) {
 		return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 	}
 }
