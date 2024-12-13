@@ -32,6 +32,9 @@ public class ReservationService {
 	@Autowired 
 	public UserRepository userRepository;
 	
+	@Autowired
+	public EmailService emailService;
+	
 	public boolean checkAvailability(Long roomId, LocalDateTime dataStart, LocalDateTime dataEnd) {
 	    boolean isTimeAvailable = !reservationRepository.findByRoomAndTimeOverlap(roomId, dataStart, dataEnd);
 	    
@@ -75,10 +78,11 @@ public class ReservationService {
 		        }
 		        
 		        Reservation reservation = new Reservation(start, end, quantity, null, room, user);
-
-		      
 		        reservationRepository.save(reservation);
-
+		        
+		        emailService.sendEmail(user.getEmail(),"Reserva", "Reserva N: " + reservation.getId() + 
+		        		" marcada com horário " + start + " - " + end);
+		    
 		    } catch (DateTimeParseException e) {
 		        throw new InvalidReservationException("Formato de data inválido. Use o formato yyyy-MM-dd'T'HH:mm:ss.");
 		    }
@@ -99,7 +103,11 @@ public class ReservationService {
 		
 		Reservation newReservation = findByReservation(id);
 		newReservation.setStatus(reservation.getStatus());
-		
 		reservationRepository.save(newReservation);
+	
+		String userEmail = newReservation.getUser().getEmail();
+		
+		emailService.sendEmail(userEmail, "Atualização Reserva", "Status da reserva atualizado com sucesso");
+    
 	}
 }
