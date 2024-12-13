@@ -12,6 +12,7 @@ import challenge.meeting.domains.Reservation;
 import challenge.meeting.domains.Room;
 import challenge.meeting.domains.User;
 import challenge.meeting.exception.InvalidReservationException;
+import challenge.meeting.exception.ReservationNotFoundException;
 import challenge.meeting.exception.RoomNotFoundException;
 import challenge.meeting.exception.RoomUnavailableException;
 import challenge.meeting.exception.UserNotFoundException;
@@ -88,4 +89,17 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 	
+	public Reservation findByReservation(Long id) {
+		return reservationRepository.findById(id).orElseThrow(() -> 
+		new ReservationNotFoundException("Reserva N: " + id + " não foi encontrado"));
+	}
+	
+	
+	public void updataReservation(Long id, Reservation reservation) {
+		
+		Reservation newReservation = findByReservation(id);
+		newReservation.setStatus(reservation.getStatus());
+		
+		reservationRepository.save(newReservation);
+	}
 }
