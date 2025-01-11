@@ -19,4 +19,4 @@ Envio de notificação por e-mail para confirmação de reservas.
 
 # Autor
 
-Bruno Souza Vieira
+Bruno Souza Vieira/www.linkedin.com/in/brunosouzav
